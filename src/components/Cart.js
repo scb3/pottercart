@@ -1,12 +1,23 @@
 /* eslint-disable react/prop-types */
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { removeItem,addQuantity,subtractQuantity} from './actions/cartActions'
+import Recipe from './Recipe';
 
 class Cart extends Component{
-
+//to remove the item completely
+handleRemove = (id)=>{
+    this.props.removeItem(id);
+}
+//to add the quantity
+handleAddQuantity = (id)=>{
+    this.props.addQuantity(id);
+}
+//to substruct from the quantity
+handleSubtractQuantity = (id)=>{
+    this.props.subtractQuantity(id);
+}
     render(){
               
         let addedItems = this.props.items.length ?
@@ -27,8 +38,8 @@ class Cart extends Component{
                                             <b>Quantity: {item.quantity}</b> 
                                         </p>
                                         <div className="add-remove">
-                                            <Link to="/cart"><i className="material-icons">arrow_drop_up</i></Link>
-                                            <Link to="/cart"><i className="material-icons">arrow_drop_down</i></Link>
+                                            <Link to="/cart"><i className="material-icons"></i></Link>
+                                            <Link to="/cart"><i className="material-icons"></i></Link>
                                         </div>
                                         <button className="waves-effect waves-light btn pink remove">Remove</button>
                                     </div>
@@ -49,6 +60,7 @@ class Cart extends Component{
                         {addedItems}
                     </ul>
                 </div>  
+                <Recipe />     
             </div>
        )
     }

@@ -14,8 +14,8 @@ class Home extends Component{
 
 
     render(){
-        // eslint-disable-next-line react/prop-types
-        let itemList = this.props.items.map(item=>{ //Mapping out the Books on the page in a 3 x 3 table (Col3 in HTML/Bootstrap)
+    
+        let itemList = this.props.items.map(item=>{ //Mapping out the Books on the page
             return(
                 <div className="card" key={item.id}>
                         <div className="card-image">

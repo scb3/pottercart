@@ -3,7 +3,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Recipe extends Component{   
+    componentWillUnmount() {
+        // eslint-disable-next-line react/no-string-refs
+        if(this.refs.shipping.checked)
+             this.props.substractShipping()
+   }
 
+   handleChecked = (e)=>{
+       if(e.target.checked){
+           this.props.addShipping();
+       }
+       else{
+           this.props.substractShipping();
+       }
+   }
     render(){
         
         return(
