@@ -1,24 +1,27 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import "materialize-css/dist/css/materialize.min.css";
+import { addToCart } from './actions/cartActions'
+
 
 class Home extends Component{
 
     handleClick = (id)=>{
-        // eslint-disable-next-line react/prop-types
+      
         this.props.addToCart(id); 
     }
 
 
     render(){
         // eslint-disable-next-line react/prop-types
-        let itemList = this.props.items.map(item=>{
+        let itemList = this.props.items.map(item=>{ //Mapping out the Books on the page in a 3 x 3 table (Col3 in HTML/Bootstrap)
             return(
                 <div className="card" key={item.id}>
                         <div className="card-image">
                             <img src={item.img} alt={item.title}/>
                             <span className="card-title">{item.title}</span>
-                            <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
+                            <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">+</i></span>
                         </div>
 
                         <div className="card-content">
@@ -32,7 +35,7 @@ class Home extends Component{
 
         return(
             <div className="container">
-                <h3 className="center">Our items</h3>
+                <h3 className="center">Our Books</h3>
                 <div className="box">
                     {itemList}
                 </div>
@@ -42,17 +45,16 @@ class Home extends Component{
 }
         
   
-
+//Return this back to App.js to display on the page
 const mapStateToProps = (state)=>{
     return {
         items: state.items
          }
     }
 
-    const mapDispatchToProps= (dispatch)=>{
+    const mapDispatchToProps = (dispatch)=>{
     
-        return{
-            // eslint-disable-next-line no-undef
+        return{            
             addToCart: (id)=>{dispatch(addToCart(id))}
         }
     }

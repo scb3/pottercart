@@ -12,7 +12,8 @@ const Navbar = ()=>{
 
                 <ul className="right">
                     <li><Link to="/">Shop</Link></li>                    
-                    <li><Link to="/cart"><i className="material-icons">Cart</i></Link></li>
+                    <li><Link to="./Cart"><i className="material-icons">Cart</i></Link></li>
+                    <li><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
                 </ul>
             </div>
 
