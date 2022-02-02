@@ -1,62 +1,65 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import "materialize-css/dist/css/materialize.min.css";
-import { addToCart } from './actions/cartActions'
+import { addToCart } from "./actions/cartActions";
 
+class Home extends Component {
+  handleClick = (id) => {
+    this.props.addToCart(id);
+  };
 
-class Home extends Component{
+  render() {
+    let itemList = this.props.items.map((item) => {
+      //Mapping out the Books on the page
+      return (
+        <div className="card" key={item.id}>
+          <div className="card-image">
+            <img src={item.img} alt={item.title} />
+            <span className="card-title">{item.title}</span>
+            <span
+              to="/"
+              className="btn-floating halfway-fab waves-effect waves-light red"
+              onClick={() => {
+                this.handleClick(item.id);
+              }}
+            >
+              <i className="material-icons">+</i>
+            </span>
+          </div>
 
-    handleClick = (id)=>{
-      
-        this.props.addToCart(id); 
-    }
+          <div className="card-content">
+            <p>{item.desc}</p>
+            <p>
+              <b>Price: £{item.price}</b>
+            </p>
+          </div>
+        </div>
+      );
+    });
 
-
-    render(){
-    
-        let itemList = this.props.items.map(item=>{ //Mapping out the Books on the page
-            return(
-                <div className="card" key={item.id}>
-                        <div className="card-image">
-                            <img src={item.img} alt={item.title}/>
-                            <span className="card-title">{item.title}</span>
-                            <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">+</i></span>
-                        </div>
-
-                        <div className="card-content">
-                            <p>{item.desc}</p>
-                            <p><b>Price: £{item.price}</b></p>
-                        </div>
-                 </div>
-
-            )
-        })
-
-        return(
-            <div className="container">
-                <h3 className="center">Our Books</h3>
-                <div className="box">
-                    {itemList}
-                </div>
-            </div>
-        )
-    }
+    return (
+      <div className="container">
+        <h3 className="center">Our Books</h3>
+        <div className="box">{itemList}</div>
+      </div>
+    );
+  }
 }
-        
-  
+
 //Return this back to App.js to display on the page
-const mapStateToProps = (state)=>{
-    return {
-        items: state.items
-         }
-    }
+const mapStateToProps = (state) => {
+  return {
+    items: state.items,
+  };
+};
 
-    const mapDispatchToProps = (dispatch)=>{
-    
-        return{            
-            addToCart: (id)=>{dispatch(addToCart(id))}
-        }
-    }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id) => {
+      dispatch(addToCart(id));
+    },
+  };
+};
 
-    export default connect(mapStateToProps,mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
